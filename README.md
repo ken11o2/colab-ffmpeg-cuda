@@ -41,7 +41,7 @@ If you are having trouble with the pre-built binaries, buid the binaries from sc
 ```
 or
 ```bash
-!chmod +x ./colab-ffmpeg-cuda/compile-ffmpeg-nvenc.sh && ./colab-ffmpeg-cuda/compile-ffmpeg-nvenc.sh
+!chmod +x ./colab-ffmpeg-cuda/ffmpeg-nvenc-build.sh && ./colab-ffmpeg-cuda/ffmpeg-nvenc-build.sh
 ```
 
 There you go, ffmpeg with the required binaries should be installed to `/usr/bin`.
