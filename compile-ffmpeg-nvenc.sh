@@ -16,14 +16,15 @@ sudo apt-get -y --force-yes install autoconf automake build-essential libass-dev
 InstallCUDASDK(){
 echo "Installing CUDA and the latest driver repositories from repositories"
 cd ~/ffmpeg_sources
-wget -c -v -nc https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.2.88-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu1604_9.2.88-1_amd64.deb
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+wget -c -v -nc http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.2.89-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1804_10.2.89-1_amd64.deb
+sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 sudo apt-get -y update
 sudo apt-get -y install cuda
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update && sudo apt-get -y upgrade
 }
+
 
 #Install nvidia SDK
 installSDK(){
@@ -40,9 +41,9 @@ sudo make install
 compileNasm(){
 echo "Compiling nasm"
 cd ~/ffmpeg_sources
-wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc0/nasm-2.14rc0.tar.gz
-tar xzvf nasm-2.14rc0.tar.gz
-cd nasm-2.14rc0
+wget http://www.nasm.us/pub/nasm/stable/nasm-2.15.05.tar.gz
+tar xzvf nasm-2.15.05.tar.gz
+cd nasm-2.15.05
 ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin"
 make -j$(nproc)
 make -j$(nproc) install
@@ -53,8 +54,8 @@ make -j$(nproc) distclean
 compileLibX264(){
 echo "Compiling libx264"
 cd ~/ffmpeg_sources
-wget http://download.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
-tar xjvf last_x264.tar.bz2
+wget http://download.videolan.org/pub/x264/snapshots/x264-snapshot-20191217-2245.tar.bz2
+tar xjvf x264-snapshot-20191217-2245.tar.bz2
 cd x264-snapshot*
 PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
 PATH="$HOME/bin:$PATH" make -j$(nproc)
@@ -82,9 +83,9 @@ compileLibMP3Lame(){
 echo "Compiling libmp3lame"
 sudo apt-get install nasm
 cd ~/ffmpeg_sources
-wget http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
-tar xzvf lame-3.99.5.tar.gz
-cd lame-3.99.5
+wget http://downloads.sourceforge.net/projects/lame/files/lame/3.100/lame-3.100.tar.gz
+tar xzvf lame-3.100.tar.gz
+cd lame-3.100
 ./configure --prefix="$HOME/ffmpeg_build" --enable-nasm --disable-shared
 make -j$(nproc)
 make -j$(nproc) install
@@ -95,9 +96,9 @@ make -j$(nproc) distclean
 compileLibOpus(){
 echo "Compiling libopus"
 cd ~/ffmpeg_sources
-wget http://downloads.xiph.org/releases/opus/opus-1.2.1.tar.gz
-tar xzvf opus-1.2.1.tar.gz
-cd opus-1.2.1
+wget http://ftp.osuosl.org/pub/xiph/releases/opus/opusfile-0.12.tar.gz
+tar xzvf opusfile-0.12.tar.gz
+cd opusfile-0.12
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared
 make -j$(nproc)
 make -j$(nproc) install
